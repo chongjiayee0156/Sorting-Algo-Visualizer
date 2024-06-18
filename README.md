@@ -1,4 +1,4 @@
-A website used to revise basic algorithms
+A website used to revise basic sorting algorithms
 
 [Live demo](https://chongjiayee0156.github.io/Sorting-Algo-Visualizer/)
 

@@ -11,7 +11,7 @@ const clearBtn = document.getElementById('clearBtn');
 const speedSelect = document.getElementById('speedSelect');
 const pauseBtn = document.getElementById('pauseBtn');
 const algorithmSelect = document.getElementById('algoSelect');
-let array = [5,2,3,10,1];
+let array = [5,2,3,10,1,2,7,8,9,4,6];
 let working_array = [];
 
 const barSpacing = 10;
@@ -50,11 +50,11 @@ function drawArray(arr) {
         console.log('canvas.height:', canvas.height);
         var barHeight = value * scaleFactor;
         // Draw bar
-        ctx.fillStyle = 'lightgreen';    
+        ctx.fillStyle = 'skyblue';    
         ctx.fillRect(x, y, barWidth, value * scaleFactor);
         
         // Draw text label
-        ctx.fillStyle = 'lightgreen';
+        ctx.fillStyle = 'skyblue';
         ctx.font = `bold 2vh Arial`;
         ctx.textAlign = 'center';
         // ctx.textBaseline = 'top'; // Align text to the top

@@ -1,5 +1,6 @@
 A website used to revise basic algorithms
 
+[Live demo](https://chongjiayee0156.github.io/Sorting-Algo-Visualizer/)
 
 Provide basic visualizer features, such as
 - input array

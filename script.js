@@ -350,101 +350,165 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const algorithmCodes = {
         bubble: `
-def bubble_sort(arr):
+def bubblesort(arr):
+    """
+    Last i elements are sorted.
+    
+    For each iteration, 
+    compare each element with the next element, 
+    swap if the current element is greater 
+    than the next element.
+    """
     n = len(arr)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-
-if __name__ == "__main__":
-    arr = [64, 34, 25, 12, 22, 11, 90]
-    print("Original array:", arr)
-    bubble_sort(arr)
-    print("Sorted array:", arr)
+    for i in range(n-1):
+        # loop for n-1 times 
+        # (since the last element will be in 
+        # place after each iteration, everything 
+        # will be in-place after n-1 iterations)
+        swapped = False
+        # if nothing is swapped in an iteration, 
+        # then the array is already sorted, break early
+        for j in range(n-i-1):
+            # for each iteration, skip the last i 
+            # elements, it is already in place
+            if arr[j] > arr[j+1]:
+                # swap if the current element is 
+                # greater than the next element
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = True
+        if not swapped:
+            break
+    return arr
         `,
         insertion: `
-def insertion_sort(arr):
-    for i in range(1, len(arr)):
+def insertionsort(arr):
+    """
+    First i elements are sorted.
+    
+    For each iteration,
+    - compare the current element with the 
+    elements before it,
+    - move the elements that are greater than 
+    the current element to the right,
+    - insert the current element to the right place.
+    """
+    n = len(arr)
+    for i in range(1, n):
+        # for elements arr[0...i-1], 
+        # if it is greater than arr[i], 
+        # move it to the right
         key = arr[i]
-        j = i - 1
-        while j >= 0 and key < arr[j]:
-            arr[j + 1] = arr[j]
+        
+        j = i-1
+        
+        while j>=0 and arr[j]>key:
+            arr[j+1] = arr[j]
             j -= 1
-        arr[j + 1] = key
-
-if __name__ == "__main__":
-    arr = [64, 34, 25, 12, 22, 11, 90]
-    print("Original array:", arr)
-    insertion_sort(arr)
-    print("Sorted array:", arr)
+            
+        arr[j+1] = key
+        
+    return arr
         `,
         selection: `
-def selection_sort(arr):
-    for i in range(len(arr)):
+def selectionsort(arr):
+    """
+    First i elements are sorted.
+    
+    For each iteration,
+    - find the minimum element in 
+    the remaining unsorted array,
+    - swap the found minimum element 
+    with the current element.
+    """
+    n = len(arr)
+    for i in range(n):
+        # find min element in remaining 
+        # unsorted array
         min_idx = i
-        for j in range(i + 1, len(arr)):
+        for j in range(i+1, n):
             if arr[j] < arr[min_idx]:
                 min_idx = j
+                
+        # swap the found min element with 
+        # the current element
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
-
-if __name__ == "__main__":
-    arr = [64, 34, 25, 12, 22, 11, 90]
-    print("Original array:", arr)
-    selection_sort(arr)
-    print("Sorted array:", arr)
+        
+    return arr
         `,
         quick: `
-def quick_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x < pivot]
-    middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x > pivot]
-    return quick_sort(left) + middle + quick_sort(right)
-
-if __name__ == "__main__":
-    arr = [64, 34, 25, 12, 22, 11, 90]
-    print("Original array:", arr)
-    arr = quick_sort(arr)
-    print("Sorted array:", arr)
+def quicksort(arr):
+    """
+    The pivot is always in the right place 
+    after each iteration.
+    
+    Divide and conquer.
+    Sort is in divide process.
+    
+    Pick a pivot element,
+    partition the array into three parts:
+    - elements less than the pivot
+    - elements equal to the pivot
+    - elements greater than the pivot
+    Recursively sort the left and right parts.
+    Merge the sorted parts.
+    """
+    pivot = arr[0]
+    left = []
+    middle = [pivot]
+    right = []
+    
+    for i in range(1, len(arr)):
+        if arr[i] < pivot:
+            left.append(arr[i])
+        elif arr[i] == pivot:
+            middle.append(arr[i])
+        else:
+            right.append(arr[i])
+            
+    if len(left) > 1:
+        left = quicksort(left)
+    if len(right) > 1:
+        right = quicksort(right)
+        
+    return left + middle + right
         `,
         merge: `
-def merge_sort(arr):
-    if len(arr) > 1:
-        mid = len(arr) // 2
-        L = arr[:mid]
-        R = arr[mid:]
+def mergesort(arr):
+    """
+    Divide and conquer.
+    Sort is in merge process.
+    
+    - Split the array into two halves 
+    until each half has only one element.
+    - then merge the two halves by sorting them.
+    """
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) // 2
+    left = mergesort(arr[:mid])
+    right = mergesort(arr[mid:])
+    
+    return merge(left, right)
 
-        merge_sort(L)
-        merge_sort(R)
-
-        i = j = k = 0
-        while i < len(L) and j < len(R):
-            if L[i] < R[j]:
-                arr[k] = L[i]
-                i += 1
-            else:
-                arr[k] = R[j]
-                j += 1
-            k += 1
-
-        while i < len(L):
-            arr[k] = L[i]
+def merge(left, right):
+    res = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            res.append(left[i])
             i += 1
-            k += 1
-
-        while j < len(R):
-            arr[k] = R[j]
+        else:
+            res.append(right[j])
             j += 1
-            k += 1
-
-if __name__ == "__main__":
-    arr = [64, 34, 25, 12, 22, 11, 90]
-    print("Original array:", arr)
-    merge_sort(arr)
-    print("Sorted array:", arr)
+            
+    res += left[i:]
+    res += right[j:]
+    
+    return res 
+    
+    
+print(mergesort([64, 34, 25, 12, 22, 11, 90]))
         `
     };
 

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js CSS for Dark Mode -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <h1>Sorting Algorithms Revision</h1>
+    <br>
+    <hr>
+    <br>
+    <div class="algorithm">
+        <h2>Select Algorithm</h2>
+        <select id="algoSelect">
+            <option value="bubble">Bubble Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="selection">Selection Sort</option>
+            <option value="quick">Quick Sort</option>
+            <option value="merge">Merge Sort</option>
+        </select>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+    <h2 id="visualizerName"></h2>
+    <div class="input">
+        <label for="arrayInput">Enter array elements separated by commas:</label>
+        <input type="text" id="arrayInput" placeholder="5,2,3,10,1">
+        <button id="submitArrayBtn">Submit Array</button>
+    </div>
+    <br>
+    <div class="speed">
+        <label for="speedSelect">Select Speed:</label>
+        <select id="speedSelect">
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+        </select>
+    </div>
+
+    <br>
+
+    <div class="controls">
+        <button id="startBtn" disabled>Start Sorting</button>
+        <button id="pauseBtn" disabled>Pause</button>
+        <button id="resetBtn">Reset</button>
+        <button id="clearBtn">Clear input</button>
+    </div>
+
+
+    <div class="visualizer">
+        <canvas id="canvas"></canvas>
+    </div>
+    <br>
+    <hr>
+    <br>
+
+    <div class="codes">
+        <h2 id="code_name"></h2>
+        <pre><code id="codeBlock" class="language-python"></code></pre>
+    </div>
+
+    <br>
+    
+    <div class="complexity">
+        <h2 id="time"></h2>
+        <p id="timeComp"></p>
+        <h2 id="space"></h2>
+        <p id="spaceComp"></p>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+    <h2>Overall Complexity Table</h2>
+    <table>
+        <tr>
+            <th>Algorithm</th>
+            <th>Best Time Complexity</th>
+            <th>Average Time Complexity</th>
+            <th>Worst Time Complexity</th>
+            <th>Space Complexity</th>
+        </tr>
+        <tr>
+            <td class="algorithm">Bubble Sort</td>
+            <td>O(n)</td>
+            <td>O(n^2)</td>
+            <td>O(n^2)</td>
+            <td>O(1)</td>
+        </tr>
+        <tr>
+            <td class="algorithm">Insertion Sort</td>
+            <td>O(n)</td>
+            <td>O(n^2)</td>
+            <td>O(n^2)</td>
+            <td>O(1)</td>
+        </tr>
+        <tr>
+            <td class="algorithm">Selection Sort</td>
+            <td>O(n^2)</td>
+            <td>O(n^2)</td>
+            <td>O(n^2)</td>
+            <td>O(1)</td>
+        </tr>
+        <tr>
+            <td class="algorithm">Quick Sort</td>
+            <td>O(n log n)</td>
+            <td>O(n log n)</td>
+            <td>O(n^2)</td>
+            <td>O(log n)</td>
+        </tr>
+        <tr>
+            <td class="algorithm">Merge Sort</td>
+            <td>O(n log n)</td>
+            <td>O(n log n)</td>
+            <td>O(n log n)</td>
+            <td>O(n)</td>
+        </tr>
+        <tr>
+            <td class="algorithm">Counting Sort</td>
+            <td>O(n + k)</td>
+            <td>O(n + k)</td>
+            <td>O(n + k)</td>
+            <td>O(n + k)</td>
+        </tr>
+        <tr>
+            <td class="algorithm">Radix Sort</td>
+            <td>O(n * k)</td>
+            <td>O(n * k)</td>
+            <td>O(n * k)</td>
+            <td>O(n + k)</td>
+        </tr>
+    </table>
+
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-python.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
